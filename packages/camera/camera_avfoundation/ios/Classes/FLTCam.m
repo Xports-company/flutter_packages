@@ -351,6 +351,10 @@ NSString *const errorMethod = @"error";
   if (connection && connection.isVideoOrientationSupported) {
     connection.videoOrientation = [self getVideoOrientationForDeviceOrientation:orientation];
   }
+
+  if ([connection isVideoStabilizationSupported]) {
+    [connection setPreferredVideoStabilizationMode:AVCaptureVideoStabilizationModeStandard];
+  }
 }
 
 - (void)captureToFileWithCompletion:(void (^)(NSString *_Nullable,
