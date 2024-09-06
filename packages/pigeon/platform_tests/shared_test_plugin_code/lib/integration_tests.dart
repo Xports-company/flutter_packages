@@ -19,6 +19,9 @@ enum TargetGenerator {
   /// The Windows C++ generator.
   cpp,
 
+  /// The Linux GObject generator.
+  gobject,
+
   /// The Android Java generator.
   java,
 
@@ -981,6 +984,15 @@ void runPigeonIntegrationTests(TargetGenerator targetGenerator) {
       const AnEnum? sentEnum = null;
       final AnEnum? echoEnum = await api.echoNullableEnum(sentEnum);
       expect(echoEnum, sentEnum);
+    });
+
+    testWidgets('null classes serialize and deserialize correctly',
+        (WidgetTester _) async {
+      final HostIntegrationCoreApi api = HostIntegrationCoreApi();
+
+      final AllNullableTypes? echoObject = await api.echoAllNullableTypes(null);
+
+      expect(echoObject, isNull);
     });
 
     testWidgets('optional nullable parameter', (WidgetTester _) async {
