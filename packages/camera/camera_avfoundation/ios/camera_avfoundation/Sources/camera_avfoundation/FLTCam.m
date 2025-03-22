@@ -385,6 +385,10 @@ static void selectBestFormatForRequestedFrameRate(
   if (connection && connection.isVideoOrientationSupported) {
     connection.videoOrientation = [self getVideoOrientationForDeviceOrientation:orientation];
   }
+
+  if ([connection isVideoStabilizationSupported]) {
+    [connection setPreferredVideoStabilizationMode:AVCaptureVideoStabilizationModeStandard];
+  }
 }
 
 - (void)captureToFileWithCompletion:(void (^)(NSString *_Nullable,
